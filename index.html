@@ -162,6 +162,69 @@ footer { background:var(--navy); padding:3rem 6%; display:flex; align-items:cent
 .social-btn:hover { background:rgba(200,208,222,.12); border-color:rgba(200,208,222,.5); }
 .social-btn svg { width:18px; height:18px; }
 
+/* TOAST CONFIRMACIÓN */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  z-index: 999;
+  background: var(--navy);
+  border: 1px solid rgba(200,208,222,.2);
+  border-left: 3px solid var(--silver-lt);
+  padding: 1.1rem 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 340px;
+  max-width: 90vw;
+  box-shadow: 0 24px 48px rgba(26,39,68,.25);
+  opacity: 0;
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1), opacity .4s ease;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.toast-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: rgba(200,208,222,.08);
+  border: 1px solid rgba(200,208,222,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.toast-body { flex: 1; }
+.toast-title {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--blanco);
+  letter-spacing: .04em;
+  margin-bottom: .18rem;
+}
+.toast-sub {
+  font-size: .75rem;
+  color: var(--silver);
+  line-height: 1.5;
+}
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--silver);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: .2rem;
+  line-height: 1;
+  transition: color .2s;
+  flex-shrink: 0;
+}
+.toast-close:hover { color: var(--blanco); }
+
 /* ANIMATIONS */
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0}to{opacity:1} }
@@ -402,7 +465,7 @@ footer { background:var(--navy); padding:3rem 6%; display:flex; align-items:cent
         <div class="c-text"><strong>Facebook</strong><a href="https://www.facebook.com/santamorita.importacion" target="_blank" rel="noopener" style="color:var(--texto-lt);text-decoration:none;">Santamorita importación</a></div>
       </div>
     </div>
-    <form class="contact-form reveal" action="https://formspree.io/f/xwvywzpn" method="POST">
+    <form class="contact-form reveal" id="forma-cotizacion">
       <div class="form-row">
         <div class="form-group"><label>Nombre</label><input type="text" name="nombre" placeholder="Tu nombre completo" required/></div>
         <div class="form-group"><label>Empresa</label><input type="text" name="empresa" placeholder="Nombre de tu empresa"/></div>
@@ -423,12 +486,21 @@ footer { background:var(--navy); padding:3rem 6%; display:flex; align-items:cent
         <label>Mensaje</label>
         <textarea name="mensaje" placeholder="Cuéntanos tu necesidad: cantidad estimada, frecuencia de pedido, destino de entrega…"></textarea>
       </div>
-      <input type="hidden" name="_subject" value="Nueva cotización — Santa Morita"/>
-      <input type="hidden" name="_next" value="https://www.santamorita.cl"/>
-      <button type="submit" class="form-submit">Enviar cotización →</button>
+      <button type="submit" class="form-submit" id="btn-submit">Enviar cotización →</button>
     </form>
   </div>
 </section>
+
+<!-- TOAST CONFIRMACIÓN -->
+
+<div class="toast" id="toast-exito" role="alert">
+  <div class="toast-icon">✓</div>
+  <div class="toast-body">
+    <div class="toast-title">¡Cotización enviada con éxito!</div>
+    <div class="toast-sub">Revisaremos tu solicitud y te responderemos a la brevedad.</div>
+  </div>
+  <button class="toast-close" onclick="cerrarToast()" aria-label="Cerrar">×</button>
+</div>
 
 <!-- FOOTER -->
 
@@ -467,11 +539,62 @@ footer { background:var(--navy); padding:3rem 6%; display:flex; align-items:cent
 </footer>
 
 <script>
+  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   reveals.forEach(r => obs.observe(r));
+
+  // Toast
+  function mostrarToast() {
+    const toast = document.getElementById('toast-exito');
+    toast.classList.add('show');
+    setTimeout(() => cerrarToast(), 6000);
+  }
+  function cerrarToast() {
+    document.getElementById('toast-exito').classList.remove('show');
+  }
+
+  // Envío AJAX — la página nunca cambia, Formspree trabaja en segundo plano
+  const forma = document.getElementById('forma-cotizacion');
+  const btnSubmit = document.getElementById('btn-submit');
+
+  forma.addEventListener('submit', async function(e) {
+    e.preventDefault(); // Evita el envío normal (y la redirección a Formspree)
+
+    // Estado de carga en el botón
+    btnSubmit.textContent = 'Enviando…';
+    btnSubmit.disabled = true;
+
+    const datos = new FormData(forma);
+
+    try {
+      const respuesta = await fetch('https://formspree.io/f/xwvywzpn', {
+        method: 'POST',
+        body: datos,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (respuesta.ok) {
+        forma.reset();                  // Limpia el formulario
+        mostrarToast();                 // Muestra confirmación
+      } else {
+        btnSubmit.textContent = 'Error al enviar. Intenta de nuevo.';
+        btnSubmit.disabled = false;
+      }
+    } catch (error) {
+      btnSubmit.textContent = 'Sin conexión. Intenta de nuevo.';
+      btnSubmit.disabled = false;
+    }
+
+    // Restaurar botón después de 4 segundos si hubo error
+    setTimeout(() => {
+      if (btnSubmit.disabled === false) return;
+      btnSubmit.textContent = 'Enviar cotización →';
+      btnSubmit.disabled = false;
+    }, 4000);
+  });
 </script>
 
 </body>
