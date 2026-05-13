@@ -35,7 +35,7 @@
     "description": "Empresa importadora chilena especializada en sacos de polipropileno de 25 kg para papa.",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Santiago",
+      "addressLocality": "Hijuelas",
       "addressCountry": "CL"
     },
     "email": "contacto@santamorita.cl",
@@ -46,7 +46,7 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
@@ -62,19 +62,21 @@
       --texto-lt:  #5a6680;
     }
     html { scroll-behavior: smooth; }
-    body { font-family:'Outfit',sans-serif; background:var(--blanco); color:var(--texto); overflow-x:hidden; }
+    body { font-family:'Inter',sans-serif; background:var(--blanco); color:var(--texto); overflow-x:hidden; }
 
     /* NAV */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100;
       display:flex; align-items:center; justify-content:space-between;
-      padding:1rem 6%;
+      padding:0.9rem 6%;
       background:rgba(26,39,68,0.97);
       backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(200,208,222,0.15);
+      border-bottom:1px solid rgba(200,208,222,0.18);
+      min-height:68px;
     }
-    .nav-logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; }
-    .nav-logo-text { font-family:'Outfit',sans-serif; font-weight:600; font-size:.95rem; letter-spacing:.18em; text-transform:uppercase; color:var(--blanco); }
+    .nav-logo { display:flex; align-items:center; gap:.85rem; text-decoration:none; line-height:1; }
+    .nav-logo svg { display:block; filter: drop-shadow(0 0 6px rgba(200,208,222,0.25)); }
+    .nav-logo-text { font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.35rem; letter-spacing:.14em; text-transform:uppercase; color:#ffffff; line-height:1; }
     .nav-links { display:flex; gap:2rem; list-style:none; }
     .nav-links a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.82rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; transition:color .2s; }
     .nav-links a:hover { color:var(--silver-lt); }
@@ -85,7 +87,7 @@
     #hero {
       min-height:100vh; background:var(--navy);
       display:grid; grid-template-columns:1fr 1fr;
-      align-items:center; padding:8rem 6% 5rem;
+      align-items:center; padding:9rem 6% 5rem;
       position:relative; overflow:hidden;
     }
     .hero-geo { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
@@ -93,7 +95,7 @@
     .hero-content { position:relative; z-index:2; }
     .hero-eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--silver); margin-bottom:1.8rem; opacity:0; animation:fadeUp .6s .15s forwards; }
     .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--silver); }
-    .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,5.5vw,5.8rem); font-weight:700; line-height:1.05; color:var(--blanco); margin-bottom:1.6rem; opacity:0; animation:fadeUp .7s .3s forwards; }
+    .hero-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(3rem,5.5vw,5.8rem); font-weight:700; line-height:1.05; color:var(--blanco); margin-bottom:1.6rem; opacity:0; animation:fadeUp .7s .3s forwards; }
     .hero-title em { color:var(--silver-lt); font-style:normal; display:block; }
     .hero-sub { font-size:1rem; color:rgba(255,255,255,.5); line-height:1.8; max-width:460px; margin-bottom:3rem; opacity:0; animation:fadeUp .7s .45s forwards; }
     .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; opacity:0; animation:fadeUp .7s .6s forwards; }
@@ -107,7 +109,7 @@
     .hero-card-icon::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, transparent 55%, rgba(26,39,68,0.85) 100%); pointer-events:none; }
     .hero-card-icon img { width:100%; height:280px; object-fit:cover; object-position:center; display:block; }
     .hero-card-info { padding:1.4rem 1.6rem 1.8rem; position:relative; z-index:2; margin-top:-2px; }
-    .hero-card-name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; color:var(--blanco); margin-top:1rem; }
+    .hero-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.6rem; font-weight:700; color:var(--blanco); margin-top:1rem; }
     .hero-card-sub { font-size:.78rem; color:var(--silver); letter-spacing:.12em; text-transform:uppercase; margin-top:.3rem; }
     .card-badge { position:absolute; background:var(--blanco); color:var(--navy); font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.45rem .9rem; border-radius:2px; }
     .card-badge.top { top:-14px; right:20px; }
@@ -118,14 +120,14 @@
     .stat { padding:2rem 1.5rem; text-align:center; border-right:1px solid var(--silver-lt); transition:background .25s; }
     .stat:last-child { border-right:none; }
     .stat:hover { background:var(--blanco); }
-    .stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:700; color:var(--navy); line-height:1; }
+    .stat-num { font-family:'Space Grotesk',sans-serif; font-size:2.8rem; font-weight:700; color:var(--navy); line-height:1; }
     .stat-lbl { font-size:.7rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--silver); margin-top:.4rem; }
 
     /* SECTIONS */
     section { padding:6rem 6%; }
     .s-tag { font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--navy-lt); display:flex; align-items:center; gap:.6rem; margin-bottom:.9rem; }
     .s-tag::before { content:''; width:24px; height:1.5px; background:var(--navy-lt); }
-    .s-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:700; line-height:1.1; color:var(--navy); margin-bottom:1rem; }
+    .s-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:700; line-height:1.1; color:var(--navy); margin-bottom:1rem; }
     .s-sub { font-size:.97rem; color:var(--texto-lt); line-height:1.8; max-width:540px; }
 
     /* PRODUCTOS */
@@ -138,7 +140,7 @@
     .prod-top.mid  { background:linear-gradient(135deg,var(--navy-md),var(--navy-lt)); }
     .prod-top.lite { background:linear-gradient(135deg,var(--silver),var(--silver-lt)); }
     .prod-body { padding:1.6rem; }
-    .prod-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:700; color:var(--navy); margin-bottom:.5rem; }
+    .prod-name { font-family:'Space Grotesk',sans-serif; font-size:1.25rem; font-weight:700; color:var(--navy); margin-bottom:.5rem; }
     .prod-desc { font-size:.875rem; color:var(--texto-lt); line-height:1.7; margin-bottom:1rem; }
     .prod-specs { display:flex; gap:.5rem; flex-wrap:wrap; }
     .prod-spec { font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; background:var(--fondo); color:var(--navy-lt); padding:.3rem .7rem; border-radius:2px; border:1px solid var(--silver-xs); }
@@ -158,7 +160,7 @@
     .nos-grid { display:grid; grid-template-columns:1fr 1fr; border:1px solid rgba(200,208,222,.1); border-radius:4px; overflow:hidden; }
     .nos-box { padding:2.2rem 1.8rem; text-align:center; background:rgba(255,255,255,.03); border:1px solid rgba(200,208,222,.08); transition:background .25s; }
     .nos-box:hover { background:rgba(255,255,255,.07); }
-    .nos-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:700; color:var(--silver-lt); line-height:1; }
+    .nos-num { font-family:'Space Grotesk',sans-serif; font-size:3rem; font-weight:700; color:var(--silver-lt); line-height:1; }
     .nos-lbl { font-size:.72rem; color:var(--silver); letter-spacing:.1em; text-transform:uppercase; margin-top:.5rem; }
 
     /* POR QUÉ */
@@ -166,14 +168,14 @@
     .pq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:3rem; }
     .pq-card { padding:2.2rem 1.8rem; border-top:2px solid var(--navy); border:1px solid var(--silver-xs); border-top:2px solid var(--navy); border-radius:0 0 4px 4px; transition:transform .3s; }
     .pq-card:hover { transform:translateY(-4px); }
-    .pq-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:700; color:var(--silver-xs); line-height:1; margin-bottom:.8rem; }
+    .pq-num { font-family:'Space Grotesk',sans-serif; font-size:3rem; font-weight:700; color:var(--silver-xs); line-height:1; margin-bottom:.8rem; }
     .pq-title { font-weight:600; color:var(--navy); margin-bottom:.5rem; }
     .pq-desc { font-size:.875rem; color:var(--texto-lt); line-height:1.7; }
 
     /* CONTACTO */
     #contacto { background:var(--fondo); }
     .contact-wrap { display:grid; grid-template-columns:1fr 1.3fr; gap:5rem; align-items:start; margin-top:3rem; }
-    .contact-info h3 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:.9rem; }
+    .contact-info h3 { font-family:'Space Grotesk',sans-serif; font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:.9rem; }
     .contact-info p { font-size:.93rem; color:var(--texto-lt); line-height:1.8; margin-bottom:2rem; }
     .c-item { display:flex; gap:1rem; align-items:center; margin-bottom:1.1rem; }
     .c-icon { width:40px; height:40px; flex-shrink:0; background:var(--navy); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:.95rem; }
@@ -183,16 +185,16 @@
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     .form-group { display:flex; flex-direction:column; gap:.4rem; }
     .form-group label { font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--navy); }
-    .form-group input, .form-group select, .form-group textarea { background:var(--blanco); border:1.5px solid var(--silver-xs); border-radius:2px; padding:.75rem 1rem; font-family:'Outfit',sans-serif; font-size:.9rem; color:var(--texto); transition:border-color .2s; outline:none; }
+    .form-group input, .form-group select, .form-group textarea { background:var(--blanco); border:1.5px solid var(--silver-xs); border-radius:2px; padding:.75rem 1rem; font-family:'Inter',sans-serif; font-size:.9rem; color:var(--texto); transition:border-color .2s; outline:none; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--navy-lt); }
     .form-group textarea { resize:vertical; min-height:110px; }
-    .form-submit { background:var(--navy); color:var(--blanco); border:none; border-radius:2px; padding:1rem 2.5rem; font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:background .25s; align-self:flex-start; }
+    .form-submit { background:var(--navy); color:var(--blanco); border:none; border-radius:2px; padding:1rem 2.5rem; font-family:'Inter',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:background .25s; align-self:flex-start; }
     .form-submit:hover { background:var(--navy-md); }
 
     /* FOOTER */
     footer { background:var(--navy); padding:3rem 6%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; border-top:1px solid rgba(200,208,222,.1); }
     .footer-logo { display:flex; align-items:center; gap:.7rem; }
-    .footer-logo-text { font-family:'Outfit',sans-serif; font-weight:600; font-size:.88rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+    .footer-logo-text { font-family:'Inter',sans-serif; font-weight:600; font-size:.88rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.6); }
     .footer-copy { font-size:.78rem; color:rgba(255,255,255,.3); }
     .footer-links { display:flex; gap:1.5rem; align-items:center; }
     .footer-links a { font-size:.78rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
@@ -232,9 +234,9 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- Inner web lines (gray) -->
-      <g stroke="#9aa5b8" stroke-width="0.8" opacity="0.6">
+      <g stroke="#c8d0de" stroke-width="1" opacity="0.85">
         <line x1="50" y1="5"  x2="50" y2="95"/>
         <line x1="5"  y1="50" x2="95" y2="50"/>
         <line x1="15" y1="15" x2="85" y2="85"/>
@@ -249,9 +251,9 @@
         <line x1="85" y1="85" x2="5"  y2="50"/>
         <line x1="15" y1="85" x2="95" y2="50"/>
       </g>
-      <!-- Outer 8-pointed star (navy) -->
-      <polygon points="50,5 58,42 95,50 58,58 50,95 42,58 5,50 42,42" fill="none" stroke="#c8d0de" stroke-width="1.8" stroke-linejoin="round"/>
-      <circle cx="50" cy="50" r="3.5" fill="#c8d0de"/>
+      <!-- Outer 8-pointed star (light) -->
+      <polygon points="50,5 55.36,37.07 81.82,18.18 62.93,44.64 95,50 62.93,55.36 81.82,81.82 55.36,62.93 50,95 44.64,62.93 18.18,81.82 37.07,55.36 5,50 37.07,44.64 18.18,18.18 44.64,37.07" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="50" cy="50" r="4" fill="#ffffff"/>
     </svg>
     <span class="nav-logo-text">Santa Morita</span>
   </a>
@@ -282,7 +284,7 @@
         <line x1="425" y1="425" x2="10"  y2="250"/>
         <line x1="75"  y1="425" x2="490" y2="250"/>
       </g>
-      <polygon points="250,10 290,210 490,250 290,290 250,490 210,290 10,250 210,210" fill="none" stroke="white" stroke-width="1" opacity="0.5" stroke-linejoin="round"/>
+      <polygon points="250,10 276.82,185.36 409.09,90.91 314.64,223.18 490,250 314.64,276.82 409.09,409.09 276.82,314.64 250,490 223.18,314.64 90.91,409.09 185.36,276.82 10,250 185.36,223.18 90.91,90.91 223.18,185.36" fill="none" stroke="white" stroke-width="1" opacity="0.5" stroke-linejoin="round"/>
       <circle cx="250" cy="250" r="8" fill="white" opacity="0.3"/>
     </svg>
   </div>
@@ -320,7 +322,7 @@
 <div class="stats-bar">
   <div class="stat"><div class="stat-num">500K+</div><div class="stat-lbl">Sacos distribuidos</div></div>
   <div class="stat"><div class="stat-num">200+</div><div class="stat-lbl">Clientes activos</div></div>
-  <div class="stat"><div class="stat-num">5+</div><div class="stat-lbl">Años de experiencia</div></div>
+  <div class="stat"><div class="stat-num">2+</div><div class="stat-lbl">Años de experiencia</div></div>
   <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Calidad garantizada</div></div>
 </div>
 
@@ -433,7 +435,28 @@
         <div class="c-text"><strong>Facebook</strong><a href="https://www.facebook.com/santamorita.importacion" target="_blank" rel="noopener" style="color:var(--texto-lt);text-decoration:none;">Santamorita importación</a></div>
       </div>
     </div>
-    <form class="contact-form reveal" action="https://formspree.io/f/xwvywzpn" method="POST">
+    <!--
+      ============================================================
+      FORMULARIO CONECTADO A MAKE.COM
+      ------------------------------------------------------------
+      1) En Make.com crea un escenario con el módulo
+         "Webhooks > Custom webhook".
+      2) Copia la URL del webhook y reemplázala abajo en el
+         atributo data-webhook (línea marcada).
+      3) En Make encadena los módulos en este orden:
+            Webhook  ->  Tools > Sleep (delay 240 segundos = 4 min)
+                     ->  Email / Gmail > Send an email
+                        - From:    contacto@santamorita.cl
+                        - To:      {{1.email}}
+                        - Subject: Tu presupuesto — Santa Morita
+                        - Body:    plantilla con {{1.nombre}}, {{1.producto}}, {{1.mensaje}}
+         (Opcional) Agrega un segundo "Send an email" con copia interna
+         a contacto@santamorita.cl para tener la cotización en bandeja.
+      ============================================================
+    -->
+    <form id="formCotizacion" class="contact-form reveal"
+          data-webhook="https://hook.us2.make.com/6cnd7yif5q9eaq0cw44f5hchoi9v1l1s"
+          novalidate>
       <div class="form-row">
         <div class="form-group"><label>Nombre</label><input type="text" name="nombre" placeholder="Tu nombre completo" required/></div>
         <div class="form-group"><label>Empresa</label><input type="text" name="empresa" placeholder="Nombre de tu empresa"/></div>
@@ -454,9 +477,10 @@
         <label>Mensaje</label>
         <textarea name="mensaje" placeholder="Cuéntanos tu necesidad: cantidad estimada, frecuencia de pedido, destino de entrega…"></textarea>
       </div>
-      <input type="hidden" name="_subject" value="Nueva cotización — Santa Morita"/>
-      <input type="hidden" name="_next" value="https://www.santamorita.cl"/>
+      <input type="hidden" name="origen" value="santamorita.cl"/>
+      <input type="hidden" name="asunto" value="Nueva cotización — Santa Morita"/>
       <button type="submit" class="form-submit">Enviar cotización →</button>
+      <div id="formStatus" class="form-status" role="status" aria-live="polite" style="margin-top:14px;display:none;font-size:14px;line-height:1.5;"></div>
     </form>
   </div>
 </section>
@@ -475,12 +499,12 @@
         <line x1="5"  y1="50" x2="85" y2="15"/>
         <line x1="95" y1="50" x2="15" y2="85"/>
       </g>
-      <polygon points="50,5 58,42 95,50 58,58 50,95 42,58 5,50 42,42" fill="none" stroke="#c8d0de" stroke-width="1.8" stroke-linejoin="round"/>
+      <polygon points="50,5 55.36,37.07 81.82,18.18 62.93,44.64 95,50 62.93,55.36 81.82,81.82 55.36,62.93 50,95 44.64,62.93 18.18,81.82 37.07,55.36 5,50 37.07,44.64 18.18,18.18 44.64,37.07" fill="none" stroke="#c8d0de" stroke-width="1.5" stroke-linejoin="round"/>
       <circle cx="50" cy="50" r="3.5" fill="#c8d0de"/>
     </svg>
     <span class="footer-logo-text">Santa Morita</span>
   </div>
-  <span class="footer-copy">© 2025 Santa Morita. Todos los derechos reservados. — Santiago, Chile</span>
+  <span class="footer-copy">© 2026 Santa Morita. Todos los derechos reservados. — Santiago, Chile</span>
   <div class="footer-links">
     <a href="#productos">Productos</a>
     <a href="#nosotros">Nosotros</a>
@@ -502,6 +526,62 @@
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   reveals.forEach(r => obs.observe(r));
+
+  /* ===== Envío del formulario al webhook de Make.com ===== */
+  const form   = document.getElementById('formCotizacion');
+  const status = document.getElementById('formStatus');
+
+  if (form) {
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+
+      // Validación nativa básica
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const webhook = form.getAttribute('data-webhook');
+      if (!webhook || webhook.includes('REEMPLAZA_CON_TU_WEBHOOK')) {
+        status.style.display = 'block';
+        status.style.color = '#b00020';
+        status.textContent = '⚠️ Falta configurar la URL del webhook de Make.com en el atributo data-webhook del formulario.';
+        return;
+      }
+
+      const btn = form.querySelector('.form-submit');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+      status.style.display = 'block';
+      status.style.color = '';
+      status.textContent = 'Enviando tu solicitud…';
+
+      // Construimos el payload con todos los campos del formulario
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.fecha = new Date().toISOString();
+
+      try {
+        const res = await fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        form.reset();
+        status.style.color = '#0a7a32';
+        status.innerHTML = '✅ ¡Gracias! Recibimos tu solicitud. En aproximadamente <strong>4 minutos</strong> te llegará tu presupuesto desde <strong>contacto@santamorita.cl</strong>. Revisa también tu carpeta de spam.';
+      } catch (err) {
+        console.error(err);
+        status.style.color = '#b00020';
+        status.textContent = '❌ No pudimos enviar tu solicitud. Inténtalo nuevamente o escíbenos a contacto@santamorita.cl.';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  }
 </script>
 </body>
 </html>
