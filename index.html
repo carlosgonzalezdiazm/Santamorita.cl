@@ -729,7 +729,7 @@
                 <option value="">Selecciona tu rubro</option>
                 <option value="Ferretero">Ferretero</option>
                 <option value="Leña">Leña</option>
-                <option value="Agricola">Agricola</option>
+                <option value="Agrícola">Agrícola</option>
                 <option value="Otros">Otros</option>
               </select>
             </div>
@@ -781,6 +781,15 @@
 
           <input type="hidden" name="origen" value="santamorita.cl"/>
           <input type="hidden" name="asunto" value="Nueva cotización — Santa Morita"/>
+
+          <!-- Campos calculados automáticamente antes de enviar a Make/Formspree -->
+          <input type="hidden" name="precio_unitario" value=""/>
+          <input type="hidden" name="total_estimado" value=""/>
+          <input type="hidden" name="costo_total" value=""/>
+          <input type="hidden" name="ganancia_real" value=""/>
+          <input type="hidden" name="ganancia_porcentaje" value=""/>
+          <input type="hidden" name="total_estimado_formateado" value=""/>
+          <input type="hidden" name="ganancia_real_formateada" value=""/>
 
           <button type="submit" class="cp-submit">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
@@ -933,7 +942,43 @@
 
       // Construimos el payload con todos los campos del formulario
       const data = Object.fromEntries(new FormData(form).entries());
+
+      // Normalización para Make/Formspree
       data.fecha = new Date().toISOString();
+      data.rubro = (data.rubro || '').trim();
+
+      // Compatibilidad: si en Make todavía aparece "empresa", enviamos el mismo valor.
+      // En Google Sheets debes mapear empresa/rubro hacia la columna Rubro (C).
+      data.empresa = data.rubro;
+
+      // Cálculo correcto de cotización
+      // Precio normal: $160 IVA incluido
+      // Precio mayorista desde 10.000 unidades: $155 IVA incluido
+      // Costo: $95 IVA incluido
+      const cantidad = parseInt(String(data.cantidad || '').replace(/[^0-9]/g, ''), 10) || 0;
+      const precioUnitario = cantidad >= 10000 ? 155 : 160;
+      const costoUnitario = 95;
+      const totalEstimado = cantidad * precioUnitario;
+      const costoTotal = cantidad * costoUnitario;
+      const gananciaReal = (totalEstimado - costoTotal) / 1.19;
+      const gananciaPct = totalEstimado > 0 ? gananciaReal / totalEstimado : 0;
+
+      const formatoCLP = (valor) => '$' + Math.round(valor || 0).toLocaleString('es-CL');
+
+      data.cantidad = cantidad;
+      data.precio_unitario = precioUnitario;
+      data.total_estimado = totalEstimado;
+      data.costo_total = costoTotal;
+      data.ganancia_real = Math.round(gananciaReal);
+      data.ganancia_porcentaje = (gananciaPct * 100).toFixed(1) + '%';
+      data.total_estimado_formateado = formatoCLP(totalEstimado);
+      data.ganancia_real_formateada = formatoCLP(gananciaReal);
+
+      // También actualizamos los hidden inputs, útil si cambias a Formspree nativo.
+      Object.keys(data).forEach((key) => {
+        const input = form.querySelector(`[name="${key}"]`);
+        if (input) input.value = data[key];
+      });
 
       try {
         const res = await fetch(webhook, {
