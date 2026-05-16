@@ -1,6 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1319780996761266');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1319780996761266&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Santa Morita | Sacos de Polipropileno 25 kg — Importación Chile</title>
@@ -588,7 +616,8 @@
           <div class="cp-row">
             <div class="cp-group">
               <label>Cantidad estimada (unidades) <span class="req">*</span></label>
-              <input type="number" name="cantidad" min="1" step="1" placeholder="Ej: 3000 unidades" required/>
+              <input type="number" name="cantidad" min="500" step="1" placeholder="Ej: 3000 unidades" required/>
+              <small style="display:block;margin-top:7px;color:#7c89a3;font-size:12px;line-height:1.4;">Pedido mínimo: 500 unidades.</small>
             </div>
 
             <div class="cp-group">
@@ -831,6 +860,12 @@
       const data = Object.fromEntries(new FormData(form).entries());
 
       const cantidad = limpiarNumero(data.cantidad);
+
+      if (cantidad < 500) {
+        showStatus('⚠️ Santa Morita trabaja únicamente con pedidos desde <strong>500 unidades</strong>.', '#b00020');
+        return;
+      }
+
       const cotizacion = calcularCotizacion(cantidad);
 
       data.fecha = new Date().toISOString();
