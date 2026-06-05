@@ -333,6 +333,27 @@
       .form-row{grid-template-columns:1fr}
       footer{flex-direction:column;text-align:center}
     }
+    /* FAQ */
+    #faq { background:var(--fondo); padding:6rem 6%; }
+    .faq-grid { max-width:780px; margin:3rem auto 0; display:flex; flex-direction:column; gap:.75rem; }
+    .faq-item { background:var(--blanco); border:1px solid var(--silver-xs); border-radius:4px; overflow:hidden; }
+    .faq-item summary {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 1.5rem; cursor:pointer; list-style:none;
+      font-family:'Space Grotesk',sans-serif; font-size:.97rem; font-weight:600; color:var(--navy);
+      transition:background .2s;
+    }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary:hover { background:var(--fondo); }
+    .faq-item[open] summary { border-bottom:1px solid var(--silver-xs); }
+    .faq-item summary .faq-arrow { width:22px; height:22px; flex-shrink:0; border-radius:50%; background:var(--silver-xs); display:flex; align-items:center; justify-content:center; transition:transform .25s,background .2s; }
+    .faq-item[open] summary .faq-arrow { transform:rotate(180deg); background:var(--navy); }
+    .faq-item[open] summary .faq-arrow svg { stroke:#fff; }
+    .faq-item summary .faq-arrow svg { width:13px; height:13px; fill:none; stroke:var(--navy); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .faq-body { padding:1.25rem 1.5rem; font-size:.9rem; color:var(--texto-lt); line-height:1.75; }
+    .faq-body a { color:var(--navy); font-weight:600; text-decoration:underline dotted; }
+    .faq-body strong { color:var(--navy); }
+
   </style>
 </head>
 <body>
@@ -367,6 +388,7 @@
     <li><a href="#productos">Productos</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#porque">Ventajas</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <a href="#contacto" class="nav-cta">Cotizar</a>
@@ -453,6 +475,7 @@
         <div class="prod-desc">Saco tejido de polipropileno (PP) especialmente diseñado para el almacenamiento y transporte de papa. Resistente a la humedad, liviano y con costuras reforzadas para máxima durabilidad. Importado directamente para garantizar la mejor calidad al mejor precio del mercado chileno.</div>
         <div class="prod-specs">
           <span class="prod-spec">25 kg</span>
+          <span class="prod-spec">42 × 76 cm</span>
           <span class="prod-spec">Polipropileno</span>
           <span class="prod-spec">PP tejido</span>
           <span class="prod-spec">Reutilizable</span>
@@ -541,6 +564,10 @@
           <div class="cp-feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg></div>
           <div class="cp-feat-text"><h4>Despachos a todo Chile</h4><p>Llegamos a tu empresa o proyecto donde lo necesites.</p></div>
         </div>
+        <div class="cp-feat">
+          <div class="cp-feat-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="cp-feat-text"><h4>Escríbenos directamente</h4><p><a href="mailto:contacto@santamorita.cl?subject=Cotización%20Sacos%20PP%2025%20kg" style="color:var(--navy);font-weight:600;text-decoration:underline dotted;transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">contacto@santamorita.cl ↗</a></p></div>
+        </div>
       </div>
 
       <div class="cp-wa-card">
@@ -616,8 +643,8 @@
           <div class="cp-row">
             <div class="cp-group">
               <label>Cantidad estimada (unidades) <span class="req">*</span></label>
-              <input type="number" name="cantidad" min="500" step="1" placeholder="Ej: 3000 unidades" required/>
-              <small style="display:block;margin-top:7px;color:#7c89a3;font-size:12px;line-height:1.4;">Pedido mínimo: 500 unidades.</small>
+              <input type="number" name="cantidad" min="1000" step="1" placeholder="Ej: 3000 unidades" required/>
+              <small style="display:block;margin-top:7px;color:#7c89a3;font-size:12px;line-height:1.4;">Pedido mínimo: 1.000 unidades. Precios con IVA incluido.</small>
             </div>
 
             <div class="cp-group">
@@ -628,7 +655,7 @@
 
           <div class="cp-group">
             <label>Mensaje / Requerimiento</label>
-            <textarea name="mensaje" placeholder="Cuéntanos detalles sobre el producto que necesitas, cantidades, impresión personalizada o requerimientos especiales."></textarea>
+            <textarea name="mensaje" placeholder="Cuéntanos detalles sobre el producto que necesitas, cantidades, requerimientos especiales."></textarea>
           </div>
 
           <div class="cp-check">
@@ -654,6 +681,58 @@
 
       </form>
     </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal" style="text-align:center;">
+    <span class="s-tag" style="justify-content:center;">Preguntas frecuentes</span>
+    <h2 class="s-title">Todo lo que necesitas saber</h2>
+    <p class="s-sub" style="margin:0 auto;">Respondemos las dudas más comunes antes de que tengas que preguntarlas.</p>
+  </div>
+  <div class="faq-grid reveal">
+
+    <details class="faq-item">
+      <summary>¿Cuál es el pedido mínimo?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">El pedido mínimo es de <strong>1.000 unidades</strong>. Este volumen nos permite mantener precios competitivos y cubrir el costo logístico del despacho a todo Chile.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Los precios incluyen IVA?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Sí. Los precios de <strong>$175 c/u</strong> (1.000–9.999 unidades) y <strong>$165 c/u</strong> (10.000 o más) son valores finales con IVA incluido. Al emitir la factura electrónica, el IVA se desglosa correctamente según exige el SII.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Cuáles son las medidas del saco?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">El saco mide <strong>42 × 76 cm</strong> con una capacidad de <strong>25 kg</strong>. Está fabricado con polipropileno (PP) virgen tejido de alta densidad y costura multifilamento reforzada.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Hacen despacho a regiones?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Sí, coordinamos despacho a las <strong>15 regiones de Chile</strong>. El costo de flete se cotiza por separado según el destino y el volumen del pedido.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Cuánto demora el despacho?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Con stock disponible, coordinamos el despacho en <strong>24 a 48 horas hábiles</strong> desde la confirmación del pedido y el pago. El tiempo de llegada depende del destino.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Para qué otros usos sirven los sacos?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Además de papa, los sacos PP son ideales para <strong>leña, carbón, granos, semillas, cebolla, áridos, sustrato y alimento animal</strong>. El tejido transpirable y la costura reforzada los hace versátiles para cualquier producto a granel.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Emiten factura?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Sí. Emitimos <strong>factura electrónica</strong> con IVA desglosado en todos los pedidos. El precio publicado ya incluye el IVA, sin sorpresas al momento del pago.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Cómo cotizo?<span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+      <div class="faq-body">Puedes llenar el <a href="#contacto">formulario en esta página</a>, escribirnos directamente a <a href="mailto:contacto@santamorita.cl?subject=Cotización%20Sacos%20PP">contacto@santamorita.cl</a> o por WhatsApp al <strong>+56 9 4400 5542</strong>. Respondemos en menos de 4 horas hábiles.</div>
+    </details>
 
   </div>
 </section>
@@ -861,8 +940,8 @@
 
       const cantidad = limpiarNumero(data.cantidad);
 
-      if (cantidad < 500) {
-        showStatus('⚠️ Santa Morita trabaja únicamente con pedidos desde <strong>500 unidades</strong>.', '#b00020');
+      if (cantidad < 1000) {
+        showStatus('⚠️ Santa Morita trabaja únicamente con pedidos desde <strong>1.000 unidades</strong>.', '#b00020');
         return;
       }
 
